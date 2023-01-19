@@ -26,15 +26,15 @@ public class FilterAutenticacao implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;//ServletRequest -> HttpServletRequest
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
 		Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
 		
 		String url = req.getServletPath();
 		
-		if (usuarioLogado == null && !url.equalsIgnoreCase("/principal/ServletLogin")) { // nao logado
-			RequestDispatcher redireciona = request.getRequestDispatcher("/index.jsf?url="+url);//seta o parametro url com o valor da url que o usuario queria acessar
+		if (usuarioLogado == null && !url.equalsIgnoreCase("index.jsf")) { // nao logado
+			RequestDispatcher redireciona = request.getRequestDispatcher("/index.jsf");
 			redireciona.forward(request, response);
 			return;
 		} else {

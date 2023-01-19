@@ -9,6 +9,12 @@
 </h:head>
 
 <h:body>
+
+	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+		<h:commandLink value="Administração" action="primeirapagina" style="margin-left:0.7cm;"/>
+		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:0.7cm;"/>
+		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:0.7cm;"/>
+	</h:form>
 	
 	<h:form id="formPessoa">
 	
@@ -65,9 +71,9 @@
 			<h:outputLabel/>
 			<h:panelGroup>
 				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário"/>
-				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUser.png" title="Salvar Usuário"/>
-				<h:commandButton value="Deletar" action="#{pessoaBean.remover}"/>
-				<h:commandButton type="reset" value="Limpar"/>
+				<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar Usuário"/>
+				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
+				<h:commandButton style="margin-left:0.7cm;" type="reset" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
 			</h:panelGroup>
 			
 		</h:panelGrid>
@@ -102,7 +108,7 @@
 				</h:commandLink>
 			</h:column>
 			
-			<h:column>
+			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header">Excluir</f:facet>
 				
 				<h:commandLink action="#{pessoaBean.remover}" title="Excluir Usuário">

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Lançamentos</title>
+</h:head>
+
+<h:body>
+
+	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+		<h:commandLink value="Administração" action="primeirapagina" style="margin-left:0.7cm;"/>
+		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:0.7cm;"/>
+		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:0.7cm;"/>
+	</h:form>
+
+	<h:form id="formLancamento" style="margin-top:18%; margin-left:40%;">
+	
+		<h:form>
+			<h:panelGrid columns="2">
+			
+				<f:facet name="header">
+					<h:outputText value="Lançamentos"/>
+				</f:facet>
+				
+				<h:outputLabel value="ID:"/>
+				<h:inputText value="#{lancamentoBean.lancamento.id}" readonly="true"/>
+				
+				<h:outputLabel value="Nota:"/>
+				<h:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}"/>
+				
+				<h:outputLabel value="Empresa Origem:"/>
+				<h:inputText value="#{lancamentoBean.lancamento.empresaOrigem}"/>
+				
+				<h:outputLabel value="Empresa Destino:"/>
+				<h:inputText value="#{lancamentoBean.lancamento.empresaDestino}"/>
+				
+				<h:outputLabel/>
+				<h:panelGroup>
+					<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="resources/img/novoUser.png" title="Novo"/>
+					<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{lancamentoBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar"/>
+					<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{lancamentoBean.remover}" image="resources/img/deletarUser.png" title="Deletar Usuário"/>
+					<h:commandButton style="margin-left:0.7cm;" type="reset" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
+				</h:panelGroup>
+			
+			</h:panelGrid>		
+		</h:form>
+		
+	</h:form>
+	
+</h:body>
+
+</html>
