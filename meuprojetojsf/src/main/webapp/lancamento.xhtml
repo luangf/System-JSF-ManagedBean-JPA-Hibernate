@@ -10,8 +10,8 @@
 
 <h:body>
 
-	<h:form rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
-		<h:commandLink value="Administração" action="primeirapagina" style="margin-left:0.7cm;"/>
+	<h:form>
+		<h:commandLink value="Administração" action="primeirapagina" style="margin-left:0.7cm;" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
 		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:0.7cm;"/>
 		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:0.7cm;"/>
 	</h:form>
@@ -40,7 +40,8 @@
 				<h:panelGroup>
 					<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="resources/img/novoUser.png" title="Novo"/>
 					<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{lancamentoBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar"/>
-					<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{lancamentoBean.remover}" image="resources/img/deletarUser.png" title="Deletar Usuário"/>
+					<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{lancamentoBean.remover}" 
+					image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
 					<h:commandButton style="margin-left:0.7cm;" type="reset" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
 				</h:panelGroup>
 			
@@ -89,8 +90,8 @@
 				<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 					<f:facet name="header">Excluir</f:facet>
 					
-					<h:commandLink action="#{pessoaBean.remover}" title="Excluir">
-						<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
+					<h:commandLink action="#{lancamentoBean.remover}" title="Excluir">
+						<f:setPropertyActionListener value="#{lancamento}" target="#{lancamentoBean.lancamento}"/>
 						<h:graphicImage value="resources/img/deletarUser.png"/>
 					</h:commandLink>
 				</h:column>
