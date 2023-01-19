@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Cadastro de Usuário</title>	
+</h:head>
+
+<h:body>
+	
+	<h:form id="formPessoa">
+	
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Cadastro de Usuário"/>
+			</f:facet>
+			<h:outputLabel value="Id:"/>
+			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
+			
+			<h:outputLabel value="Nome:"/>
+			<h:inputText value="#{pessoaBean.pessoa.nome}"/>
+			
+			<h:outputLabel value="Sobrenome:"/>
+			<h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
+			
+			<h:outputLabel value="Idade:"/>
+			<h:inputText value="#{pessoaBean.pessoa.idade}"/>
+			
+			<h:outputLabel value="Sexo:"/>
+			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
+				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
+				<f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Frameworks:"/>
+			<h:selectManyMenu id="campoFrameworks" style="height:150px;"
+			value="#{pessoaBean.pessoa.frameworks}">
+				<f:selectItem itemValue="Hibernate"/>
+				<f:selectItem itemValue="Spring MVC"/>
+				<f:selectItem itemValue="PrimeFaces"/>
+				<f:selectItem itemValue="JSF"/>
+				<f:selectItem itemValue="JPA"/>
+			</h:selectManyMenu>
+			
+			<h:outputLabel value="Ativo:"/>
+			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
+			
+			<h:outputLabel value="Login:"/>
+			<h:inputText value="#{pessoaBean.pessoa.login}"/>
+			
+			<h:outputLabel value="Senha:"/>
+			<h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			
+			<h:outputLabel value="Perfil:"/>
+			<h:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}">
+				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>
+				<f:selectItem itemValue="SECRETARIO" itemLabel="Secretário"/>
+				<f:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel/>
+			<h:panelGroup>
+				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário"/>
+				<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUser.png" title="Salvar Usuário"/>
+				<h:commandButton value="Deletar" action="#{pessoaBean.remover}"/>
+				<h:commandButton type="reset" value="Limpar"/>
+			</h:panelGroup>
+			
+		</h:panelGrid>
+		
+		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="3" cellpadding="6">
+		
+			<f:facet name="header">
+				Lista de Usuários Cadastrados
+			</f:facet>
+		
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{pessoa.id}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{pessoa.nome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Sobrenome</f:facet>
+				<h:outputText value="#{pessoa.sobrenome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				
+				<h:commandLink title="Editar Usuário">
+					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
+					<h:graphicImage value="resources/img/editarUser.png"/>
+				</h:commandLink>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Excluir</f:facet>
+				
+				<h:commandLink action="#{pessoaBean.remover}" title="Excluir Usuário">
+					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
+					<h:graphicImage value="resources/img/deletarUser.png"/>
+				</h:commandLink>
+			</h:column>
+			
+		</h:dataTable>	
+			
+	</h:form>
+	
+</h:body>
+
+</html>
