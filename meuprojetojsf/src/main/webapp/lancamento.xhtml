@@ -16,9 +16,8 @@
 		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:0.7cm;"/>
 	</h:form>
 
-	<h:form id="formLancamento" style="margin-top:18%; margin-left:40%;">
+	<h:form id="formLancamento">
 	
-		<h:form>
 			<h:panelGrid columns="2">
 			
 				<f:facet name="header">
@@ -45,9 +44,59 @@
 					<h:commandButton style="margin-left:0.7cm;" type="reset" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
 				</h:panelGroup>
 			
-			</h:panelGrid>		
-		</h:form>
+			</h:panelGrid>
+			
+			<h:dataTable value="#{lancamentoBean.lancamentos}" var="lancamento" border="3" cellpadding="6">
 		
+				<f:facet name="header">
+					Lista de Lançamentos
+				</f:facet>
+			
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{lancamento.id}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nota</f:facet>
+					<h:outputText value="#{lancamento.numeroNotaFiscal}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Origem</f:facet>
+					<h:outputText value="#{lancamento.empresaOrigem}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Destino</f:facet>
+					<h:outputText value="#{lancamento.empresaDestino}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Usuário</f:facet>
+					<h:outputText value="#{lancamento.usuario.nome}"/>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Editar</f:facet>
+					
+					<h:commandLink title="Editar">
+						<f:setPropertyActionListener value="#{lancamento}" target="#{lancamentoBean.lancamento}"/>
+						<h:graphicImage value="resources/img/editarUser.png"/>
+					</h:commandLink>
+				</h:column>
+				
+				<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+					<f:facet name="header">Excluir</f:facet>
+					
+					<h:commandLink action="#{pessoaBean.remover}" title="Excluir">
+						<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
+						<h:graphicImage value="resources/img/deletarUser.png"/>
+					</h:commandLink>
+				</h:column>
+			
+			</h:dataTable>
+					
 	</h:form>
 	
 </h:body>
