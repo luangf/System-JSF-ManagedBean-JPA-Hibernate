@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:f="http://java.sun.com/jsf/core">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>Cadastro de Usuário</title>	
@@ -10,13 +11,11 @@
 
 <h:body>
 
-	<h:form>
-		<h:commandLink value="Administração" action="primeirapagina" style="margin-left:0.7cm;" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-		<h:commandLink value="Lançamentos" action="lancamento" style="margin-left:0.7cm;"/>
-		<h:commandLink value="Trocar Usuário" action="index" style="margin-left:0.7cm;"/>
-	</h:form>
+	<ui:include src="/menu.xhtml"/>
 	
 	<h:form id="formPessoa" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+	
+		<h:messages infoStyle="color:green; background:#6495ED;"/>
 	
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -26,7 +25,10 @@
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
 			
 			<h:outputLabel value="Nome:"/>
-			<h:inputText value="#{pessoaBean.pessoa.nome}"/>
+			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Informe Nome do User"
+				validatorMessage="Nome tem que ter de 2 letras a 50">
+				<f:validateLength minimum="2" maximum="50" />	
+			</h:inputText>
 			
 			<h:outputLabel value="Sobrenome:"/>
 			<h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
@@ -41,6 +43,11 @@
 				<f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
 			</h:selectOneMenu>
 			
+			<h:outputLabel value="Nascimento:"/>
+			<h:inputText value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data de Nascimento Errada">
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
+			</h:inputText>
+			
 			<h:outputLabel value="Frameworks:"/>
 			<h:selectManyMenu id="campoFrameworks" style="height:150px;"
 			value="#{pessoaBean.pessoa.frameworks}">
@@ -50,6 +57,9 @@
 				<f:selectItem itemValue="JSF"/>
 				<f:selectItem itemValue="JPA"/>
 			</h:selectManyMenu>
+			
+			<h:outputLabel value="CEP:"/>
+			<h:inputText></h:inputText>
 			
 			<h:outputLabel value="Ativo:"/>
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
@@ -67,6 +77,22 @@
 				<f:selectItem itemValue="SECRETARIO" itemLabel="Secretário"/>
 				<f:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista"/>
 			</h:selectOneMenu>
+			
+			<h:outputLabel value="Programador:"/>
+			<h:selectOneRadio value="#{pessoaBean.pessoa.nivelProgramador}" layout="pageDirection">
+				<f:selectItem itemValue="J" itemLabel="Junior"/>
+				<f:selectItem itemValue="P" itemLabel="Pleno"/>
+				<f:selectItem itemValue="S" itemLabel="Senior"/>
+				<f:selectItem itemValue="E" itemLabel="Especialista"/>
+			</h:selectOneRadio>
+			
+			<h:outputLabel value="Linguagens:"/>
+			<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}">
+				<f:selectItem itemValue="1" itemLabel="Java"/>
+				<f:selectItem itemValue="2" itemLabel="Pyton"/>
+				<f:selectItem itemValue="3" itemLabel="PHP"/>
+				<f:selectItem itemValue="4" itemLabel="C#"/>
+			</h:selectManyCheckbox>
 			
 			<h:outputLabel/>
 			<h:panelGroup>

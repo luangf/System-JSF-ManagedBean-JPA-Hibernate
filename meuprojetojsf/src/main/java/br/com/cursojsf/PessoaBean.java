@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -28,7 +29,14 @@ public class PessoaBean {
 	public String salvar() {
 		pessoa = daoGeneric.merge(pessoa); // salva(persiste)/atualiza e retorna o obj da entidade/classe
 		carregarPessoas();
+		mostrarMsg("Cadastrado com sucesso!");
 		return "";
+	}
+
+	private void mostrarMsg(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message=new FacesMessage(msg);
+		context.addMessage(null, message);
 	}
 
 	public String novo() {
@@ -40,6 +48,7 @@ public class PessoaBean {
 		daoGeneric.deletarPorId(pessoa);
 		pessoa = new Pessoa();
 		carregarPessoas();
+		mostrarMsg("Removido com sucesso!");
 		return "";
 	}
 
