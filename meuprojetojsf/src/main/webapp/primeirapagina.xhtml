@@ -60,8 +60,41 @@
 			
 			<h:outputLabel value="CEP:"/>
 			<h:inputText value="#{pessoaBean.pessoa.cep}">
-				<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"/>
+				<!-- event: quando o ajax vai executar -->
+				<!-- execute: envia o q foi digitado para o back -->
+				<!-- @this: componente pai desse ajax -->
+				<!-- listener: método q será executado no back end -->
+				<!-- render: recarrega o objeto -->
+				<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"
+				render="logradouro complemento bairro localidade uf ibge gia ddd siafi"/>
 			</h:inputText>
+			
+			<h:outputLabel value="Logradouro:"/>
+			<h:inputText id="logradouro" value="#{pessoaBean.pessoa.logradouro}"/>
+			
+			<h:outputLabel value="Complemento:"/>
+			<h:inputText id="complemento" value="#{pessoaBean.pessoa.complemento}"/>
+			
+			<h:outputLabel value="Bairro:"/>
+			<h:inputText id="bairro" value="#{pessoaBean.pessoa.bairro}"/>
+			
+			<h:outputLabel value="Localidade:"/>
+			<h:inputText id="localidade" value="#{pessoaBean.pessoa.localidade}"/>
+			
+			<h:outputLabel value="UF:"/>
+			<h:inputText id="uf" value="#{pessoaBean.pessoa.uf}"/>
+			
+			<h:outputLabel value="Ibge:"/>
+			<h:inputText id="ibge" value="#{pessoaBean.pessoa.ibge}"/>
+			
+			<h:outputLabel value="Gia:"/>
+			<h:inputText id="gia" value="#{pessoaBean.pessoa.gia}"/>
+			
+			<h:outputLabel value="DDD:"/>
+			<h:inputText id="ddd" value="#{pessoaBean.pessoa.ddd}"/>
+			
+			<h:outputLabel value="Siafi:"/>
+			<h:inputText id="siafi" value="#{pessoaBean.pessoa.siafi}"/>
 			
 			<h:outputLabel value="Ativo:"/>
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
