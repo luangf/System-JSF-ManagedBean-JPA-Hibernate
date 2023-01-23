@@ -99,7 +99,7 @@
 				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário"/>
 				<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar Usuário"/>
 				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-				<h:commandButton style="margin-left:0.7cm;" type="reset" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
+				<h:commandButton style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
 			</h:panelGroup>
 			
 		</h:panelGrid>

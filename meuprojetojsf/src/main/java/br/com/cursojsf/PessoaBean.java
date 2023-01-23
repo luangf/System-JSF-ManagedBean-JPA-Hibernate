@@ -44,6 +44,11 @@ public class PessoaBean {
 		return "";
 	}
 
+	public String limpar() {
+		pessoa = new Pessoa();
+		return "";
+	}
+	
 	public String remover() {
 		daoGeneric.deletarPorId(pessoa);
 		pessoa = new Pessoa();

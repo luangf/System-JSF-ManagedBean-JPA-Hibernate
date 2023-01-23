@@ -16,8 +16,8 @@ public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id //PK
+	@GeneratedValue(strategy = GenerationType.AUTO) //Seq automatica 1,2...
 	private Long id;
 
 	private String nome;

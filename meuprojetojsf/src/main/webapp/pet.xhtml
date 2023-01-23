@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Cadastro de Pets</title>
+</h:head>	
+
+<h:body>
+	
+	<ui:include src="/menu.xhtml"></ui:include>
+	
+	<h:form id="formPet">
+	
+		<h:messages infoStyle="color:green; background:#6495ED"/>
+	
+		<h:panelGrid columns="2">
+			<f:facet name="header">
+				<h:outputText value="Cadastro de Pets"/>
+			</f:facet>
+			
+			<h:outputLabel value="Id:"/>
+			<h:inputText value="#{petBean.pet.id}" readonly="true"/>
+			
+			<h:outputLabel value="Nome:"/>
+			<h:inputText value="#{petBean.pet.nome}" required="true" requiredMessage="Informe o nome do Pet por favor"/>
+			
+			<h:outputLabel value="Idade:"/>
+			<h:inputText value="#{petBean.pet.idade}"/>
+			
+			<h:outputLabel value="Sexo:"/>
+			<h:selectOneMenu value="#{petBean.pet.sexo}">
+				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+				<f:selectItem itemValue="INDEFINIDO" itemLabel="Indefinido"/>
+				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
+				<f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Poderes:"/>
+			<h:selectManyMenu value="#{petBean.pet.poderes}" style="height:100px;">
+				<f:selectItem itemValue="Corrida Poderosa"/>
+				<f:selectItem itemValue="Teleporte"/>
+				<f:selectItem itemValue="Generator"/>
+				<f:selectItem itemValue="Stop Time"/>
+			</h:selectManyMenu>
+			
+			<h:outputLabel value="Equipamentos:"/>
+			<h:selectManyCheckbox value="#{petBean.pet.equipamentos}" layout="pageDirection">
+				<f:selectItem itemValue="1" itemLabel="Botas da Velocidade Poderosa"/>
+				<f:selectItem itemValue="2" itemLabel="Capacete da Prodigiez"/>
+				<f:selectItem itemValue="3" itemLabel="Corrente éternah"/>
+				<f:selectItem itemValue="4" itemLabel="Espada Soul reactor"/>
+			</h:selectManyCheckbox>
+			
+			<h:outputLabel value="Equipado:"/>
+			<h:selectBooleanCheckbox value="#{petBean.pet.equipado}"/>
+			
+			<h:outputLabel value="Comportamento:"/>
+			<h:selectOneMenu value="#{petBean.pet.comportamento}">
+				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+				<f:selectItem itemValue="PASSIVO" itemLabel="Passivo"/>
+				<f:selectItem itemValue="AJUDANTE" itemLabel="Ajudante"/>
+				<f:selectItem itemValue="AGRESSIVO" itemLabel="Agressivo"/>
+				<f:selectItem itemValue="FEROZ" itemLabel="Feroz"/>
+				<f:selectItem itemValue="SEM LIMITES" itemLabel="Limitless"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel/>
+			<h:panelGroup>
+				<h:commandButton value="Novo" action="#{petBean.novo}"/> 
+				<h:commandButton style="margin-left:0.7cm" value="Salvar" 
+					action="#{petBean.salvar}" image="resources/img/salvarPet.png" 
+					title="Salvar Pet"/> <!-- C & U (CRUD) -->
+				<h:commandButton style="margin-left:0.7cm" value="Deletar" action="#{petBean.deletar}" 
+					rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/> <!-- D(CRUD) -->
+				<h:commandButton style="margin-left:0.7cm" value="Limpar" action="#{petBean.limpar}" type="reset"/> <!-- n envia, limpa form -->
+			</h:panelGroup>
+		</h:panelGrid>
+		
+		<h:dataTable value="#{petBean.pets}" var="pet" border="3" cellpadding="6">
+		
+			<f:facet name="header">Lista de Pets Cadastrados</f:facet>
+			
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{pet.id}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{pet.nome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Comportamento</f:facet>
+				<h:outputText value="#{pet.comportamento}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink title="Editar Pet">
+					<f:setPropertyActionListener value="#{pet}" target="#{petBean.pet}"/>
+					<h:graphicImage value="resources/img/editarUser.png"/>
+				</h:commandLink>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandLink title="Excluir Pet" action="#{petBean.deletar}" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+					<f:setPropertyActionListener value="#{pet}" target="#{petBean.pet}"/>
+					<h:graphicImage value="resources/img/deletarUser.png"/>
+				</h:commandLink>
+			</h:column>
+			
+		</h:dataTable>
+		
+	</h:form>
+	
+</h:body>
+
+</html>
