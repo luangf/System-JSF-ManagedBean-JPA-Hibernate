@@ -45,9 +45,27 @@ public class Pessoa implements Serializable {
 	private String gia;
 	private String ddd;
 	private String siafi;
+	private String cpf;
+	private String titEleitoral;
 
 	public Pessoa() { // padrão
 
+	}
+
+	public String getTitEleitoral() {
+		return titEleitoral;
+	}
+	
+	public void setTitEleitoral(String titEleitoral) {
+		this.titEleitoral = titEleitoral;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getLogradouro() {

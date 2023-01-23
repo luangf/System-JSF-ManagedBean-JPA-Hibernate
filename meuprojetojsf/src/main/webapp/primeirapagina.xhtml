@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
 	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>Cadastro de Usuário</title>	
@@ -25,8 +26,8 @@
 			<h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
 			
 			<h:outputLabel value="Nome:"/>
-			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Informe Nome do User"
-				validatorMessage="Nome tem que ter de 2 letras a 50">
+			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Informe o nome do usuário"
+				validatorMessage="Nome tem que ter de 2 letras a 50" pt:placeholder="Informe o nome do usuário">
 				<f:validateLength minimum="2" maximum="50" />	
 			</h:inputText>
 			
@@ -35,6 +36,12 @@
 			
 			<h:outputLabel value="Idade:"/>
 			<h:inputText value="#{pessoaBean.pessoa.idade}"/>
+			
+			<h:outputLabel value="CPF:"/>
+			<h:inputText value="#{pessoaBean.pessoa.cpf}" pt:placeholder="Informe um CPF válido"/>
+			
+			<h:outputLabel value="Título Eleitoral:"/>
+			<h:inputText value="#{pessoaBean.pessoa.titEleitoral}"/>
 			
 			<h:outputLabel value="Sexo:"/>
 			<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
@@ -59,7 +66,7 @@
 			</h:selectManyMenu>
 			
 			<h:outputLabel value="CEP:"/>
-			<h:inputText value="#{pessoaBean.pessoa.cep}">
+			<h:inputText value="#{pessoaBean.pessoa.cep}" pt:placeholder="Informe um CEP válido">
 				<!-- event: quando o ajax vai executar -->
 				<!-- execute: envia o q foi digitado para o back -->
 				<!-- @this: componente pai desse ajax -->
