@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import br.com.dao.DaoGeneric;
 import br.com.entidades.Pessoa;
@@ -26,6 +27,10 @@ public class PessoaBean {
 
 	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
 
+	public void pesquisaCep(AjaxBehaviorEvent event) {
+		System.out.println("a"+pessoa.getCep());
+	}
+	
 	public String salvar() {
 		pessoa = daoGeneric.merge(pessoa); // salva(persiste)/atualiza e retorna o obj da entidade/classe
 		carregarPessoas();

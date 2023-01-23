@@ -16,8 +16,8 @@ public class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id //PK
-	@GeneratedValue(strategy = GenerationType.AUTO) //Seq automatica 1,2...
+	@Id // PK
+	@GeneratedValue(strategy = GenerationType.AUTO) // Seq automatica 1,2...
 	private Long id;
 
 	private String nome;
@@ -25,7 +25,7 @@ public class Pessoa implements Serializable {
 	private Integer idade; // Integer
 
 	@Temporal(TemporalType.DATE)
-	private Date dataNascimento=new Date(); // Date usei java.util
+	private Date dataNascimento = new Date(); // Date usei java.util
 
 	private String sexo;
 	private String[] frameworks;
@@ -35,9 +35,18 @@ public class Pessoa implements Serializable {
 	private String perfilUser;
 	private String nivelProgramador;
 	private Integer[] linguagens;
+	private String cep;
 
 	public Pessoa() { // padrão
 
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 
 	public void setLinguagens(Integer[] linguagens) {

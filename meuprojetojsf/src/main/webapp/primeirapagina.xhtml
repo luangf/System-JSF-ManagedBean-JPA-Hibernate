@@ -59,7 +59,9 @@
 			</h:selectManyMenu>
 			
 			<h:outputLabel value="CEP:"/>
-			<h:inputText></h:inputText>
+			<h:inputText value="#{pessoaBean.pessoa.cep}">
+				<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisaCep}"/>
+			</h:inputText>
 			
 			<h:outputLabel value="Ativo:"/>
 			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
