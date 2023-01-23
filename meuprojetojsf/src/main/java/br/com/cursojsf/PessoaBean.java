@@ -1,5 +1,10 @@
 package br.com.cursojsf;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -11,6 +16,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+
+import com.google.gson.Gson;
 
 import br.com.dao.DaoGeneric;
 import br.com.entidades.Pessoa;
@@ -28,7 +35,39 @@ public class PessoaBean {
 	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
 
 	public void pesquisaCep(AjaxBehaviorEvent event) {
-		System.out.println("a"+pessoa.getCep());
+		try {
+			//caso venha sem nada da erro
+			URL url=new URL("https://viacep.com.br/ws/"+pessoa.getCep()+"/json/");
+			URLConnection connection=url.openConnection(); //consumo
+			InputStream is=connection.getInputStream(); //demora mais pq entra la na internet...
+			BufferedReader br=new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			
+			String cep=""; //linha do JSON
+			StringBuilder jsonCep=new StringBuilder(); //string final com os dados
+			
+			while((cep=br.readLine()) != null) {
+				jsonCep.append(cep);
+			}
+			
+			//Objeto Pessoa aux
+			Pessoa gsonPessoaAux=new Gson().fromJson(jsonCep.toString(), Pessoa.class);
+			
+			pessoa.setCep(gsonPessoaAux.getCep()); //n precisa pq ja tinha setado, mas por precaução...
+			pessoa.setLogradouro(gsonPessoaAux.getLogradouro());
+			pessoa.setComplemento(gsonPessoaAux.getComplemento());
+			pessoa.setBairro(gsonPessoaAux.getBairro());
+			pessoa.setLocalidade(gsonPessoaAux.getLocalidade());
+			pessoa.setUf(gsonPessoaAux.getUf());
+			pessoa.setIbge(gsonPessoaAux.getIbge());
+			pessoa.setGia(gsonPessoaAux.getGia());
+			pessoa.setDdd(gsonPessoaAux.getDdd());
+			pessoa.setSiafi(gsonPessoaAux.getSiafi());
+			
+			System.out.println(gsonPessoaAux);
+		}catch(Exception e) {
+			e.printStackTrace();
+			mostrarMsg("Erro ao consultar o CEP");
+		}
 	}
 	
 	public String salvar() {
