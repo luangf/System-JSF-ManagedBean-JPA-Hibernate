@@ -23,7 +23,7 @@ public class Pet implements Serializable {
 	private Long id;
 
 	@Temporal(TemporalType.DATE)
-	private Date dataAdocao;
+	private Date dataAdocao=new Date(); //data atual
 
 	private String nome;
 	private Integer idade;

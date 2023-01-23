@@ -15,7 +15,7 @@
 	
 	<h:form id="formPessoa" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 	
-		<h:messages infoStyle="color:green; background:#6495ED;"/>
+		<h:messages infoStyle="color:green;"/>
 	
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -96,14 +96,21 @@
 			
 			<h:outputLabel/>
 			<h:panelGroup>
-				<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário"/>
+				<h:commandButton id="botaoNovo" value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário">
+					<f:ajax execute="botaoNovo" render="@form"/>
+				</h:commandButton>
 				<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar Usuário"/>
 				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-				<h:commandButton style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
+				<h:commandButton id="botaoLimpar" style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário">
+					<f:ajax execute="botaoLimpar" render="@form"/>
+				</h:commandButton>
 			</h:panelGroup>
 			
 		</h:panelGrid>
 		
+	</h:form>
+		
+	<h:form id="formTable">
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="3" cellpadding="6">
 		
 			<f:facet name="header">
@@ -144,7 +151,6 @@
 			</h:column>
 			
 		</h:dataTable>	
-			
 	</h:form>
 	
 </h:body>

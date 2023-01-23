@@ -15,7 +15,7 @@
 	
 	<h:form id="formPet">
 	
-		<h:messages infoStyle="color:green; background:#6495ED"/>
+		<h:messages infoStyle="color:green;"/>
 	
 		<h:panelGrid columns="2">
 			<f:facet name="header">
@@ -30,6 +30,11 @@
 			
 			<h:outputLabel value="Idade:"/>
 			<h:inputText value="#{petBean.pet.idade}"/>
+			
+			<h:outputLabel value="Data Adoção:"/>
+			<h:inputText value="#{petBean.pet.dataAdocao}">
+				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
+			</h:inputText>
 			
 			<h:outputLabel value="Sexo:"/>
 			<h:selectOneMenu value="#{petBean.pet.sexo}">
