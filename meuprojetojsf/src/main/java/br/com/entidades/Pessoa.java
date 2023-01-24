@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -48,18 +49,30 @@ public class Pessoa implements Serializable {
 	private String cpf;
 	private String titEleitoral;
 
+	// n quero gravar no banco, apenas consultar as cidades que esse estado tem
+	@Transient /* Não fica persistente, n grava no db */
+	private Estados estadoSelecionado;
+
 	public Pessoa() { // padrão
 
+	}
+
+	public Estados getEstadoSelecionado() {
+		return estadoSelecionado;
+	}
+
+	public void setEstadoSelecionado(Estados estadoSelecionado) {
+		this.estadoSelecionado = estadoSelecionado;
 	}
 
 	public String getTitEleitoral() {
 		return titEleitoral;
 	}
-	
+
 	public void setTitEleitoral(String titEleitoral) {
 		this.titEleitoral = titEleitoral;
 	}
-	
+
 	public String getCpf() {
 		return cpf;
 	}

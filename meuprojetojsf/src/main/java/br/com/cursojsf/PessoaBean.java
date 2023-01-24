@@ -16,6 +16,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
@@ -34,6 +35,8 @@ public class PessoaBean {
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
 	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
+	
+	private List<SelectItem> estados;
 
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 		try {
@@ -169,6 +172,15 @@ public class PessoaBean {
 		Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("usuarioLogado");
 		
 		return pessoaUser.getPerfilUser().equals(acesso);
+	}
+	
+	public List<SelectItem> getEstados() {
+		estados=iDaoPessoa.listaEstados();
+		return estados;
+	}
+	
+	public void setEstados(List<SelectItem> estados) {
+		this.estados = estados;
 	}
 
 }

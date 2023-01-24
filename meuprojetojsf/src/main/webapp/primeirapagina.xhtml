@@ -136,6 +136,11 @@
 				<f:selectItem itemValue="4" itemLabel="C#"/>
 			</h:selectManyCheckbox>
 			
+			<h:outputLabel value="Estados:"/>
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}">
+				<f:selectItems value="#{pessoaBean.estados}"/>
+			</h:selectOneMenu>
+			
 			<h:outputLabel/>
 			<h:panelGroup>
 				<h:commandButton id="botaoNovo" value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário">
