@@ -183,4 +183,13 @@ public class PessoaBean {
 		this.estados = estados;
 	}
 
+	public void carregaCidades(AjaxBehaviorEvent event) {
+		String idEstado=(String) event.getComponent().getAttributes().get("submittedValue");
+		
+		if(idEstado != null) {
+			
+		}
+		
+	}
+	
 }

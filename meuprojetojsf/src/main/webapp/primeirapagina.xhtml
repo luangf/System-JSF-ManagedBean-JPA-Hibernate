@@ -137,8 +137,11 @@
 			</h:selectManyCheckbox>
 			
 			<h:outputLabel value="Estados:"/>
-			<h:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}">
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" immediate="true">
+				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
 				<f:selectItems value="#{pessoaBean.estados}"/>
+				<!-- Não pode recarregar a tela, perde os dados.. sendo assim; ajax -->
+				<f:ajax event="change" execute="@this" listener="#{pessoaBean.carregaCidades}"/>
 			</h:selectOneMenu>
 			
 			<h:outputLabel/>
