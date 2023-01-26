@@ -69,4 +69,16 @@ public class DaoGeneric<E> {
 		return retorno;
 	}
 	
+	public E consultar(Class<E> entidade, String pk) {
+		EntityManager entityManager=JPAUtil.getEntityManager();
+		EntityTransaction entityTransaction=entityManager.getTransaction();
+		entityTransaction.begin();
+		
+		E objeto=(E) entityManager.find(entidade, Long.parseLong(pk));
+		
+		entityTransaction.commit();
+		
+		return objeto;
+	}
+	
 }
