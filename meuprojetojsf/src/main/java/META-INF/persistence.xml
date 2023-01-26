@@ -10,6 +10,7 @@
 		<class>br.com.entidades.Cidades</class>
 	
 		<properties>
+		
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/meuprimeiroprojetojsf"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
 			<property name="javax.persistence.jdbc.password" value="admin"/>
@@ -18,6 +19,17 @@
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			
+			<!-- min de conexoes ou "portas" disponiveis -->
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			<property name="hibernate.c3p0.max_size" value="100"/>
+			<!-- num de s q uma conexao inativa é mantida na pool -->
+			<property name="hibernate.c3p0.timeout" value="300"/>
+			<!-- num total de instruções no bd mantida em cache -->
+			<property name="hibernate.c3p0.max_statements" value="50"/>
+			<!-- tempo ocioso em s antes de uma conexao ser validada automaticamente -->
+			<property name="hibernate.c3p0.idle_test_period" value="120"/>
+			
 		</properties>
 	
 	</persistence-unit>
