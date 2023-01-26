@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -48,13 +50,27 @@ public class Pessoa implements Serializable {
 	private String siafi;
 	private String cpf;
 	private String titEleitoral;
-
+//	@Column(columnDefinition = "text")
+//	private String fotoIconBase64;
+//	private String extensao;
+	
 	// n quero gravar no banco, apenas consultar as cidades que esse estado tem
 	@Transient /* Não fica persistente, n grava no db */
 	private Estados estadoSelecionado;
 
+	@ManyToOne
+	private Cidades cidadeSelecionada;
+
 	public Pessoa() { // padrão
 
+	}
+
+	public Cidades getCidadeSelecionada() {
+		return cidadeSelecionada;
+	}
+
+	public void setCidadeSelecionada(Cidades cidadeSelecionada) {
+		this.cidadeSelecionada = cidadeSelecionada;
 	}
 
 	public Estados getEstadoSelecionado() {

@@ -137,11 +137,17 @@
 			</h:selectManyCheckbox>
 			
 			<h:outputLabel value="Estados:"/>
-			<h:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" immediate="true">
+			<h:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" immediate="true" id="comboEstados" converter="estadoConverter">
 				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
 				<f:selectItems value="#{pessoaBean.estados}"/>
 				<!-- Não pode recarregar a tela, perde os dados.. sendo assim; ajax -->
-				<f:ajax event="change" execute="@this" listener="#{pessoaBean.carregaCidades}"/>
+				<f:ajax event="change" execute="@this" listener="#{pessoaBean.carregaCidades}" render="comboCidades"/>
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Cidades:"/>
+			<h:selectOneMenu value="#{pessoaBean.pessoa.cidadeSelecionada}" id="comboCidades" converter="cidadesConverter">
+				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
+				<f:selectItems value="#{pessoaBean.cidades}"/>
 			</h:selectOneMenu>
 			
 			<h:outputLabel/>
@@ -185,7 +191,7 @@
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
 				
-				<h:commandLink title="Editar Usuário">
+				<h:commandLink title="Editar Usuário" action="#{pessoaBean.editar}">
 					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
 					<h:graphicImage value="resources/img/editarUser.png"/>
 				</h:commandLink>

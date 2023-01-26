@@ -26,7 +26,7 @@ public class Cidades implements Serializable {
 	// cascade = CascadeType.REFRESH: quando quero resgatar/atualizar no BD, eu
 	// quero fazer isso em cascata
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	private Estados estado;
+	private Estados estados;
 
 	public Long getId() {
 		return id;
@@ -44,12 +44,12 @@ public class Cidades implements Serializable {
 		this.nome = nome;
 	}
 
-	public Estados getEstado() {
-		return estado;
+	public Estados getEstados() {
+		return estados;
 	}
 
-	public void setEstado(Estados estado) {
-		this.estado = estado;
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 
 	@Override
