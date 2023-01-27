@@ -10,20 +10,33 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import br.com.entidades.Cidades;
+import br.com.entidades.Estados;
 import br.com.jpautil.JPAUtil;
 
 @FacesConverter(forClass = Cidades.class, value="cidadesConverter")
 public class CidadeConverter implements Converter, Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override //retorna o objeto inteiro
 	public Object getAsObject(FacesContext context, UIComponent component, String idCidade) {
-		EntityManager entityManager=JPAUtil.getEntityManager();
-		EntityTransaction entityTransaction=entityManager.getTransaction();
-		entityTransaction.begin();
-		
-		Cidades cidades=(Cidades) entityManager.find(Cidades.class, Long.parseLong(idCidade));
-		
-		return cidades;
+		try {
+			if (idCidade != null && !idCidade.isEmpty()) {
+
+				EntityManager entityManager = JPAUtil.getEntityManager();
+				EntityTransaction entityTransaction = entityManager.getTransaction();
+				entityTransaction.begin();
+
+				Cidades cidades=(Cidades) entityManager.find(Cidades.class, Long.parseLong(idCidade));
+
+				return cidades;
+			} else {
+				return "";
+			}
+		} catch (java.lang.NumberFormatException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override // retorna apenas o id/código em String

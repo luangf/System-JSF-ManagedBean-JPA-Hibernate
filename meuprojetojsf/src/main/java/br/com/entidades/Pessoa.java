@@ -16,6 +16,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -26,13 +34,20 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO) // Seq automatica 1,2...
 	private Long id;
 
+	@NotEmpty(message = "Nome deve ser informado")
+	@Size(min = 3, max = 50, message = "Nome deve ter de 3 a 50 letras")
 	private String nome;
+
+	@NotEmpty(message = "Sobrenome deve ser informado")
+	@NotNull(message = "Sobrenome deve ser informado")
 	private String sobrenome;
+
+	@DecimalMax(value = "70", message = "Idade deve ser menor que 50")
+	@DecimalMin(value = "10", message = "Idade deve ser maior que 10")
 	private Integer idade; // Integer
 
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date(); // Date usei java.util
-
 	private String sexo;
 	private String[] frameworks;
 	private Boolean ativo;
@@ -51,7 +66,9 @@ public class Pessoa implements Serializable {
 	private String gia;
 	private String ddd;
 	private String siafi;
+	@CPF(message = "Informe o CPF corretamente por favor")
 	private String cpf;
+	@TituloEleitoral(message = "Titulo eleitoral inválido")
 	private String titEleitoral;
 	@Column(columnDefinition = "text") // gravar arquivos em base 64
 	private String fotoIconBase64;

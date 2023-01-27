@@ -155,12 +155,16 @@
 			
 			<h:outputLabel/>
 			<h:panelGroup>
-				<h:commandButton id="botaoNovo" value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário">
+				<h:commandButton id="botaoNovo" value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário"
+					immediate="true">
 					<f:ajax execute="botaoNovo" render="@form"/>
 				</h:commandButton>
-				<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar Usuário"/>
-				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-				<h:commandButton id="botaoLimpar" style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário">
+				<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png"
+					title="Salvar Usuário"/>
+				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png"
+					title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" immediate="true"/>
+				<h:commandButton id="botaoLimpar" style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" 
+					image="resources/img/limparForm.png" title="Limpar Formulário" immediate="true">
 					<f:ajax execute="botaoLimpar" render="@form"/>
 				</h:commandButton>
 			</h:panelGroup>
@@ -202,7 +206,7 @@
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
 				
-				<h:commandLink title="Editar Usuário" action="#{pessoaBean.editar}">
+				<h:commandLink title="Editar Usuário" action="#{pessoaBean.editar}" immediate="true">
 					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
 					<h:graphicImage value="resources/img/editarUser.png"/>
 				</h:commandLink>
@@ -211,7 +215,7 @@
 			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 				<f:facet name="header">Excluir</f:facet>
 				
-				<h:commandLink action="#{pessoaBean.remover}" title="Excluir Usuário">
+				<h:commandLink action="#{pessoaBean.remover}" title="Excluir Usuário" immediate="true">
 					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
 					<h:graphicImage value="resources/img/deletarUser.png"/>
 				</h:commandLink>
