@@ -24,6 +24,7 @@ import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -92,6 +93,10 @@ public class PessoaBean {
 		}
 	}
 
+	public void registraLog() {
+		System.out.println("Registrando Log");
+	}
+	
 	public String salvar() throws IOException{
 		byte[] imagemByte=getByte(arquivoFoto.getInputStream());
 		pessoa.setFotoIconBase64Original(imagemByte); //salva img original
@@ -314,6 +319,11 @@ public class PessoaBean {
 		response.getOutputStream().write(pessoa.getFotoIconBase64Original());
 		response.getOutputStream().flush();
 		FacesContext.getCurrentInstance().responseComplete();
+	}
+	
+	public void mudancaDeValor(ValueChangeEvent event) {
+		System.out.println("Valor antigo: "+event.getOldValue());
+		System.out.println("Valor novo: "+event.getNewValue());
 	}
 	
 }

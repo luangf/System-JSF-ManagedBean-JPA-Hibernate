@@ -29,10 +29,8 @@
 			<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}"/>
 			
 			<h:outputLabel value="Nome:"/>
-			<h:inputText value="#{pessoaBean.pessoa.nome}" required="true" requiredMessage="Informe o nome do usuário"
-				validatorMessage="Nome tem que ter de 2 letras a 50" pt:placeholder="Informe o nome do usuário">
-				<f:validateLength minimum="2" maximum="50" />	
-			</h:inputText>
+			<h:inputText value="#{pessoaBean.pessoa.nome}" pt:placeholder="Informe o nome do usuário"
+				valueChangeListener="#{pessoaBean.mudancaDeValor}"/>
 			
 			<h:outputLabel value="Sobrenome:"/>
 			<h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
@@ -159,7 +157,7 @@
 					immediate="true">
 					<f:ajax execute="botaoNovo" render="@form"/>
 				</h:commandButton>
-				<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png"
+				<h:commandButton style="margin-left:0.7cm;" value="Salvar" actionListener="#{pessoaBean.registraLog}" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png"
 					title="Salvar Usuário"/>
 				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png"
 					title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" immediate="true"/>
