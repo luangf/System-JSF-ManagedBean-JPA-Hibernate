@@ -85,10 +85,6 @@ public class Pessoa implements Serializable {
 	@ManyToOne
 	private Cidades cidadeSelecionada;
 
-	public Pessoa() { // padrão
-
-	}
-
 	public String getFotoIconBase64() {
 		return fotoIconBase64;
 	}

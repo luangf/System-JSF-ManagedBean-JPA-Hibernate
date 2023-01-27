@@ -32,6 +32,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
 
+import org.hibernate.service.spi.InjectService;
+
 import com.google.gson.Gson;
 
 import br.com.dao.DaoGeneric;
@@ -50,7 +52,7 @@ public class PessoaBean {
 	private DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
-	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
+	private IDaoPessoa iDaoPessoa=new IDaoPessoaImpl();
 
 	private List<SelectItem> estados;
 	private List<SelectItem> cidades;
