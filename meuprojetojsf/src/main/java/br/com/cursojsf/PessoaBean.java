@@ -8,18 +8,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.component.html.HtmlOutputText;
 import javax.faces.component.html.HtmlSelectOneMenu;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -27,12 +24,12 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
-
-import org.hibernate.service.spi.InjectService;
 
 import com.google.gson.Gson;
 
@@ -42,22 +39,30 @@ import br.com.entidades.Estados;
 import br.com.entidades.Pessoa;
 import br.com.jpautil.JPAUtil;
 import br.com.repository.IDaoPessoa;
-import br.com.repository.IDaoPessoaImpl;
 
-@ViewScoped
-@ManagedBean(name = "pessoaBean")
-public class PessoaBean {
+@javax.faces.view.ViewScoped
+@Named(value = "pessoaBean")
+public class PessoaBean implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Pessoa pessoa = new Pessoa();
-	private DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
 	private List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
-	private IDaoPessoa iDaoPessoa=new IDaoPessoaImpl();
+	@Inject
+	private DaoGeneric<Pessoa> daoGeneric;
+	
+	//CDI instancia direto pra nos, o objeto iDaoPessoa vira "depedencia" C DI(dependency injection)
+	@Inject //o CDI busca.. quem implementa essa interface.. a classe IDaoPessoaImpl, que é denotada pelo IDaoPessoaImpl implements IDaoPessoa
+	private IDaoPessoa iDaoPessoa;
 
 	private List<SelectItem> estados;
 	private List<SelectItem> cidades;
 
 	private Part arquivoFoto; //Part, classe auxiliar para fazer upload temporario java
+	
+	@Inject
+	private JPAUtil jpaUtil;
 	
 	public void pesquisaCep(AjaxBehaviorEvent event) {
 		try {
@@ -201,6 +206,7 @@ public class PessoaBean {
 		return "index.jsf";
 	}
 
+	@SuppressWarnings("static-access")
 	public String deslogar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
@@ -232,6 +238,7 @@ public class PessoaBean {
 		this.estados = estados;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void carregaCidades(AjaxBehaviorEvent event) {
 		// todo componente tem uma classe java q representa ele
 		Estados estado = (Estados) ((HtmlSelectOneMenu) event.getSource()).getValue();
@@ -241,8 +248,10 @@ public class PessoaBean {
 			pessoa.setEstadoSelecionado(estado); // para ser retornado para tela
 			// estados_id do banco pode ser escrivo: estados.id, ja q representa a tabela
 			// HQL
-			List<Cidades> cidades = JPAUtil.getEntityManager()
-					.createQuery("from Cidades where estados.id=" + estado.getId()).getResultList();
+			List<Cidades> cidades = jpaUtil
+					.getEntityManager()
+					.createQuery("from Cidades where estados.id=" + estado.getId())
+					.getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -254,13 +263,16 @@ public class PessoaBean {
 		}
 	}
 
-	public void editar() {
+	@SuppressWarnings("unchecked")
+	public String editar() {
 		if (pessoa.getCidadeSelecionada() != null) {
 			Estados estado = pessoa.getCidadeSelecionada().getEstados();
 			pessoa.setEstadoSelecionado(estado);
 
-			List<Cidades> cidades = JPAUtil.getEntityManager()
-					.createQuery("from Cidades where estados.id=" + estado.getId()).getResultList();
+			List<Cidades> cidades = jpaUtil
+					.getEntityManager()
+					.createQuery("from Cidades where estados.id=" + estado.getId())
+					.getResultList();
 
 			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 
@@ -270,6 +282,7 @@ public class PessoaBean {
 			// setter
 			setCidades(selectItemsCidade);
 		}
+		return "";
 	}
 
 	public List<SelectItem> getCidades() {

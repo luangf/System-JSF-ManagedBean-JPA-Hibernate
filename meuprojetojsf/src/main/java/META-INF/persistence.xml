@@ -5,7 +5,6 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.com.entidades.Pessoa</class>
 		<class>br.com.entidades.Lancamento</class>
-		<class>br.com.entidades.Pet</class>
 		<class>br.com.entidades.Estados</class>
 		<class>br.com.entidades.Cidades</class>
 	

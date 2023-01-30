@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 public class Lancamento implements Serializable {
@@ -25,7 +26,7 @@ public class Lancamento implements Serializable {
 
 	@ManyToOne(optional = false) // muitos lançamentos para um usuário
 	@org.hibernate.annotations.ForeignKey(name = "usuario_fk")
-	private Pessoa usuario; // usuario q ta logado
+	private Pessoa usuario;
 
 	public Long getId() {
 		return id;

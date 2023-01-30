@@ -31,7 +31,7 @@ public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id // PK
-	@GeneratedValue(strategy = GenerationType.AUTO) // Seq automatica 1,2...
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@NotEmpty(message = "Nome deve ser informado")
@@ -44,10 +44,10 @@ public class Pessoa implements Serializable {
 
 	@DecimalMax(value = "70", message = "Idade deve ser menor que 50")
 	@DecimalMin(value = "10", message = "Idade deve ser maior que 10")
-	private Integer idade; // Integer
+	private Integer idade;
 
 	@Temporal(TemporalType.DATE)
-	private Date dataNascimento = new Date(); // Date usei java.util
+	private Date dataNascimento = new Date();
 	private String sexo;
 	private String[] frameworks;
 	private Boolean ativo;
@@ -324,8 +324,6 @@ public class Pessoa implements Serializable {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
-	// hashCode() e equals() : padrão
 
 	@Override
 	public int hashCode() {

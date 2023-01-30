@@ -78,7 +78,8 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
-			<version>5.6.7.Final</version>
+			<version>6.1.6.Final</version>
+			<type>pom</type>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
@@ -90,6 +91,7 @@
 		</dependency>
 
 		<!-- Weld (implementação do CDI) -->
+		<!-- https://mvnrepository.com/artifact/org.jboss.weld.servlet/weld-servlet -->
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
@@ -102,6 +104,13 @@
 			<groupId>org.jboss</groupId>
 			<artifactId>jandex</artifactId>
 			<version>1.2.3.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bootsfaces</groupId>
+			<artifactId>bootsfaces</artifactId>
+			<version>1.5.0</version>
 			<scope>compile</scope>
 		</dependency>
 
