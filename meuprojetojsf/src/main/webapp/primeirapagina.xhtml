@@ -17,149 +17,213 @@
 	
 	<h:form id="formPessoa" enctype="multipart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 	
-		<h:messages infoStyle="color:green;"/>
+		<b:messages/>
 	
 		<h:panelGrid columns="2">
 			<f:facet name="header">
 				<h:outputText value="Cadastro de Usuário"/>
 			</f:facet>
-			<h:outputLabel value="Id:"/>
-			<b:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
 			
-			<h:outputLabel value="Foto:"/>
-			<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}"/>
+			<b:panel>
+			<b:column>
+				<h:outputLabel value="Id:"/>
+				<b:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
+			</b:column>
 			
-			<h:outputLabel value="Nome:"/>
-			<b:inputText value="#{pessoaBean.pessoa.nome}" pt:placeholder="Informe o nome do usuário"
-				valueChangeListener="#{pessoaBean.mudancaDeValor}"/>
+			<b:column>
+				<h:outputLabel value="Foto:"/>
+				<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}"/>
+			</b:column>
 			
-			<h:outputLabel value="Sobrenome:"/>
-			<b:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
+			<b:column>
+				<h:outputLabel value="Nome:"/>
+				<b:inputText value="#{pessoaBean.pessoa.nome}" pt:placeholder="Informe o nome do usuário"
+					valueChangeListener="#{pessoaBean.mudancaDeValor}"/>
+			</b:column>
 			
-			<h:outputLabel value="Idade:"/>
-			<b:inputText value="#{pessoaBean.pessoa.idade}"/>
+			<b:column>
+				<h:outputLabel value="Sobrenome:"/>
+				<b:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
+			</b:column>
 			
-			<h:outputLabel value="CPF:"/>
-			<b:inputText value="#{pessoaBean.pessoa.cpf}" pt:placeholder="Informe um CPF válido"/>
+			<b:column>
+				<h:outputLabel value="Idade:"/>
+				<b:inputText value="#{pessoaBean.pessoa.idade}"/>
+			</b:column>
 			
-			<h:outputLabel value="Título Eleitoral:"/>
-			<b:inputText value="#{pessoaBean.pessoa.titEleitoral}"/>
+			<b:column>
+				<h:outputLabel value="CPF:"/>
+				<b:inputText value="#{pessoaBean.pessoa.cpf}" pt:placeholder="Informe um CPF válido"/>
+			</b:column>
 			
-			<h:outputLabel value="Sexo:"/>
-			<b:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
-				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
-				<f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
-				<f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
-			</b:selectOneMenu>
+			<b:column>
+				<h:outputLabel value="Título Eleitoral:"/>
+				<b:inputText value="#{pessoaBean.pessoa.titEleitoral}"/>
+			</b:column>
 			
-			<h:outputLabel value="Nascimento:"/>
-			<b:inputText value="#{pessoaBean.pessoa.dataNascimento}" converterMessage="Data de Nascimento Errada">
-				<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
-			</b:inputText>
+			<b:column>
+				<h:outputLabel value="Sexo:"/>
+				<b:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
+					<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+					<f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
+					<f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+				</b:selectOneMenu>
+			</b:column>
 			
-			<h:outputLabel value="Frameworks:"/>
-			<h:selectManyMenu id="campoFrameworks" style="height:150px;"
-			value="#{pessoaBean.pessoa.frameworks}">
-				<f:selectItem itemValue="Hibernate"/>
-				<f:selectItem itemValue="Spring MVC"/>
-				<f:selectItem itemValue="PrimeFaces"/>
-				<f:selectItem itemValue="JSF"/>
-				<f:selectItem itemValue="JPA"/>
-			</h:selectManyMenu>
+			<b:column>
+				<h:outputLabel value="Nascimento:"/>
+				<b:datepicker locale="en" value="#{pessoaBean.pessoa.dataNascimento}"/>
+			</b:column>
 			
-			<h:outputLabel value="Perfil:"/>
-			<b:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}">
-				<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
-				<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>
-				<f:selectItem itemValue="SECRETARIO" itemLabel="Secretário"/>
-				<f:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista"/>
-			</b:selectOneMenu>
+			<b:column>
+				<h:outputLabel value="Frameworks:"/>
+				<h:selectManyMenu id="campoFrameworks" style="height:150px;"
+				value="#{pessoaBean.pessoa.frameworks}">
+					<f:selectItem itemValue="Hibernate"/>
+					<f:selectItem itemValue="Spring MVC"/>
+					<f:selectItem itemValue="PrimeFaces"/>
+					<f:selectItem itemValue="JSF"/>
+					<f:selectItem itemValue="JPA"/>
+				</h:selectManyMenu>
+			</b:column>
 			
-			<h:outputLabel value="Programador:"/>
-			<h:selectOneRadio value="#{pessoaBean.pessoa.nivelProgramador}" layout="pageDirection">
-				<f:selectItem itemValue="J" itemLabel="Junior"/>
-				<f:selectItem itemValue="P" itemLabel="Pleno"/>
-				<f:selectItem itemValue="S" itemLabel="Senior"/>
-				<f:selectItem itemValue="E" itemLabel="Especialista"/>
-			</h:selectOneRadio>
 			
-			<h:outputLabel value="Linguagens:"/>
-			<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}">
-				<f:selectItem itemValue="1" itemLabel="Java"/>
-				<f:selectItem itemValue="2" itemLabel="Pyton"/>
-				<f:selectItem itemValue="3" itemLabel="PHP"/>
-				<f:selectItem itemValue="4" itemLabel="C#"/>
-			</h:selectManyCheckbox>
 			
-			<h:outputLabel value="Estados:"/>
-			<b:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" immediate="true" id="comboEstados" converter="estadoConverter">
-				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
-				<f:selectItems value="#{pessoaBean.estados}"/>
-				<f:ajax event="change" execute="@form" render="@form" listener="#{pessoaBean.carregaCidades}"/>
-			</b:selectOneMenu>
 			
-			<h:outputLabel value="Cidades:"/>
-			<b:selectOneMenu value="#{pessoaBean.pessoa.cidadeSelecionada}" id="comboCidades" converter="cidadesConverter">
-				<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
-				<f:selectItems value="#{pessoaBean.cidades}"/>
-			</b:selectOneMenu>
+			<b:column>
+				<h:outputLabel value="Perfil:"/>
+				<b:selectOneMenu id="perfil" value="#{pessoaBean.pessoa.perfilUser}">
+					<f:selectItem itemValue="NAO" itemLabel="[-Selecione-]" noSelectionOption="true"/>
+					<f:selectItem itemValue="ADMINISTRADOR" itemLabel="Administrador"/>
+					<f:selectItem itemValue="SECRETARIO" itemLabel="Secretário"/>
+					<f:selectItem itemValue="RECEPCIONISTA" itemLabel="Recepcionista"/>
+				</b:selectOneMenu>
+			</b:column>
 			
-			<h:outputLabel value="CEP:"/>
-			<b:inputText value="#{pessoaBean.pessoa.cep}" pt:placeholder="Informe um CEP válido">
-				<!-- event: quando o ajax vai executar -->
-				<!-- execute: envia o q foi digitado para o back -->
-				<!-- @this: componente pai desse ajax -->
-				<!-- listener: método q será executado no back end -->
-				<!-- render: recarrega o objeto -->
-				<f:ajax event="blur" execute="@form" render="@form" listener="#{pessoaBean.pesquisaCep}"/>
-			</b:inputText>
+			<b:column>
+				<h:outputLabel value="Programador:"/>
+				<h:selectOneRadio value="#{pessoaBean.pessoa.nivelProgramador}" layout="pageDirection">
+					<f:selectItem itemValue="J" itemLabel="Junior"/>
+					<f:selectItem itemValue="P" itemLabel="Pleno"/>
+					<f:selectItem itemValue="S" itemLabel="Senior"/>
+					<f:selectItem itemValue="E" itemLabel="Especialista"/>
+				</h:selectOneRadio>
+			</b:column>
 			
-			<h:outputLabel value="Logradouro:"/>
-			<b:inputText id="logradouro" value="#{pessoaBean.pessoa.logradouro}"/>
+			</b:panel>
+			<b:panel>
+			<b:column>
+				<h:outputLabel value="Linguagens:"/>
+				<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}">
+					<f:selectItem itemValue="1" itemLabel="Java"/>
+					<f:selectItem itemValue="2" itemLabel="Pyton"/>
+					<f:selectItem itemValue="3" itemLabel="PHP"/>
+					<f:selectItem itemValue="4" itemLabel="C#"/>
+				</h:selectManyCheckbox>
+			</b:column>
 			
-			<h:outputLabel value="Complemento:"/>
-			<b:inputText id="complemento" value="#{pessoaBean.pessoa.complemento}"/>
+			<b:column>
+				<h:outputLabel value="Estados:"/>
+				<b:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" immediate="true" id="comboEstados" converter="estadoConverter">
+					<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
+					<f:selectItems value="#{pessoaBean.estados}"/>
+					<f:ajax event="change" execute="@form" render="@form" listener="#{pessoaBean.carregaCidades}"/>
+				</b:selectOneMenu>
+			</b:column>
 			
-			<h:outputLabel value="Bairro:"/>
-			<b:inputText id="bairro" value="#{pessoaBean.pessoa.bairro}"/>
+			<b:column>
+				<h:outputLabel value="Cidades:"/>
+				<b:selectOneMenu value="#{pessoaBean.pessoa.cidadeSelecionada}" id="comboCidades" converter="cidadesConverter">
+					<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true"/>
+					<f:selectItems value="#{pessoaBean.cidades}"/>
+				</b:selectOneMenu>
+			</b:column>
 			
-			<h:outputLabel value="Localidade:"/>
-			<b:inputText id="localidade" value="#{pessoaBean.pessoa.localidade}"/>
+			<b:column>
+				<h:outputLabel value="CEP:"/>
+				<b:inputText value="#{pessoaBean.pessoa.cep}" pt:placeholder="Informe um CEP válido">
+					<!-- event: quando o ajax vai executar -->
+					<!-- execute: envia o q foi digitado para o back -->
+					<!-- @this: componente pai desse ajax -->
+					<!-- listener: método q será executado no back end -->
+					<!-- render: recarrega o objeto -->
+					<f:ajax event="blur" execute="@form" render="@form" listener="#{pessoaBean.pesquisaCep}"/>
+				</b:inputText>
+			</b:column>
 			
-			<h:outputLabel value="UF:"/>
-			<b:inputText id="uf" value="#{pessoaBean.pessoa.uf}"/>
+			<b:column>
+				<h:outputLabel value="Logradouro:"/>
+				<b:inputText id="logradouro" value="#{pessoaBean.pessoa.logradouro}"/>
+			</b:column>
 			
-			<h:outputLabel value="Ibge:"/>
-			<b:inputText id="ibge" value="#{pessoaBean.pessoa.ibge}"/>
+			<b:column>
+				<h:outputLabel value="Complemento:"/>
+				<b:inputText id="complemento" value="#{pessoaBean.pessoa.complemento}"/>
+			</b:column>
 			
-			<h:outputLabel value="Gia:"/>
-			<b:inputText id="gia" value="#{pessoaBean.pessoa.gia}"/>
+			<b:column>
+				<h:outputLabel value="Bairro:"/>
+				<b:inputText id="bairro" value="#{pessoaBean.pessoa.bairro}"/>
+			</b:column>
 			
-			<h:outputLabel value="DDD:"/>
-			<b:inputText id="ddd" value="#{pessoaBean.pessoa.ddd}"/>
+			<b:column>
+				<h:outputLabel value="Localidade:"/>
+				<b:inputText id="localidade" value="#{pessoaBean.pessoa.localidade}"/>
+			</b:column>
 			
-			<h:outputLabel value="Siafi:"/>
-			<b:inputText id="siafi" value="#{pessoaBean.pessoa.siafi}"/>
+			<b:column>
+				<h:outputLabel value="UF:"/>
+				<b:inputText id="uf" value="#{pessoaBean.pessoa.uf}"/>
+			</b:column>
 			
-			<h:outputLabel value="Ativo:"/>
-			<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
+			<b:column>
+				<h:outputLabel value="Ibge:"/>
+				<b:inputText id="ibge" value="#{pessoaBean.pessoa.ibge}"/>
+			</b:column>
 			
-			<h:outputLabel value="Login:"/>
-			<b:inputText value="#{pessoaBean.pessoa.login}"/>
+			<b:column>
+				<h:outputLabel value="Gia:"/>
+				<b:inputText id="gia" value="#{pessoaBean.pessoa.gia}"/>
+			</b:column>
 			
-			<h:outputLabel value="Senha:"/>
-			<b:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			<b:column>
+				<h:outputLabel value="DDD:"/>
+				<b:inputText id="ddd" value="#{pessoaBean.pessoa.ddd}"/>
+			</b:column>
 			
-			<h:outputLabel/>
+			<b:column>
+				<h:outputLabel value="Siafi:"/>
+				<b:inputText id="siafi" value="#{pessoaBean.pessoa.siafi}"/>
+			</b:column>
+			
+			<b:column>
+				<h:outputLabel value="Ativo:"/>
+				<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
+			</b:column>
+			
+			<b:column>
+				<h:outputLabel value="Login:"/>
+				<b:inputText value="#{pessoaBean.pessoa.login}"/>
+			</b:column>
+			
+			<b:column>
+				<h:outputLabel value="Senha:"/>
+				<b:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+			</b:column>
+			</b:panel>
+			
 			<h:panelGroup>
 				<h:commandButton id="botaoNovo" value="Novo" action="#{pessoaBean.novo}" image="resources/img/novoUser.png" title="Novo Usuário"
 					immediate="true">
 					<f:ajax execute="botaoNovo" render="@form"/>
 				</h:commandButton>
-				<h:commandButton style="margin-left:0.7cm;" value="Salvar" actionListener="#{pessoaBean.registraLog}" action="#{pessoaBean.salvar}" image="resources/img/salvarUsuario.png"
-					title="Salvar Usuário"/>
+				
+				<h:commandButton style="margin-left:0.7cm;" value="Salvar" actionListener="#{pessoaBean.registraLog}" action="#{pessoaBean.salvar}"
+					image="resources/img/salvarUsuario.png" title="Salvar Usuário"/>
+					
 				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png"
 					title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" immediate="true"/>
+					
 				<h:commandButton id="botaoLimpar" style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" 
 					image="resources/img/limparForm.png" title="Limpar Formulário" immediate="true">
 					<f:ajax execute="botaoLimpar" render="@form"/>
@@ -169,6 +233,9 @@
 		</h:panelGrid>
 		
 	</h:form>
+		
+	<br/>	
+	<br/>
 		
 	<h:form id="formTable">
 		<b:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="3" cellpadding="6">

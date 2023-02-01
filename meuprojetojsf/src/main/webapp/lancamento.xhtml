@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:b="http://bootsfaces.net/ui"
 	  xmlns:f="http://java.sun.com/jsf/core"
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -13,67 +14,106 @@
 
 	<ui:include src="/menu.xhtml"/>
 
-	<h:form id="formLancamento">
+	<b:messages id="msg"/>
+
+	<b:form id="formLancamento">
 	
-			<h:panelGrid columns="2">
+			<b:panelGrid columns="2">
 			
 				<f:facet name="header">
 					<h:outputText value="Lançamentos"/>
 				</f:facet>
 				
-				<h:outputLabel value="ID:"/>
-				<h:inputText value="#{lancamentoBean.lancamento.id}" readonly="true"/>
+				<b:panel>
+				<b:column>
+					<h:outputLabel value="ID:"/>
+					<b:inputText value="#{lancamentoBean.lancamento.id}" readonly="true"/>
+				</b:column>
 				
-				<h:outputLabel value="Nota:"/>
-				<h:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}"/>
+				<b:column>
+					<h:outputLabel value="Nota:"/>
+					<b:inputText value="#{lancamentoBean.lancamento.numeroNotaFiscal}" required="true"
+					required-message="Informe o número da nota"/>
+				</b:column>
 				
-				<h:outputLabel value="Empresa Origem:"/>
-				<h:inputText value="#{lancamentoBean.lancamento.empresaOrigem}"/>
+				<b:column>
+					<h:outputLabel value="Data Inicial:"/>
+					<b:datepicker locale="en" required="true" required-message="Informe a data inicial"
+						value="#{lancamentoBean.lancamento.dataIni}"/>					
+				</b:column>
 				
-				<h:outputLabel value="Empresa Destino:"/>
-				<h:inputText value="#{lancamentoBean.lancamento.empresaDestino}"/>
+				</b:panel>
 				
-				<h:outputLabel/>
-				<h:panelGroup>
-					<h:commandButton value="Novo" action="#{lancamentoBean.novo}" image="resources/img/novoUser.png" title="Novo"/>
-					<h:commandButton style="margin-left:0.7cm;" value="Salvar" action="#{lancamentoBean.salvar}" image="resources/img/salvarUsuario.png" title="Salvar"/>
-					<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{lancamentoBean.remover}" 
-					image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-					<h:commandButton style="margin-left:0.7cm;" type="reset" value="Limpar" image="resources/img/limparForm.png" title="Limpar Formulário"/>
-				</h:panelGroup>
-			
-			</h:panelGrid>
-			
-			<h:dataTable value="#{lancamentoBean.lancamentos}" var="lancamento" border="3" cellpadding="6">
+				<b:panel>
+				<b:column>
+					<h:outputLabel value="Empresa Origem:"/>
+					<b:inputText value="#{lancamentoBean.lancamento.empresaOrigem}" required="true"
+					required-message="Informe a origem"/>
+				</b:column>
+				
+				<b:column>
+					<h:outputLabel value="Empresa Destino:"/>
+					<b:inputText value="#{lancamentoBean.lancamento.empresaDestino}" required="true"
+					required-message="Informe o destino"/>
+				</b:column>
+				
+				<b:column>
+					<h:outputLabel value="Data Final:"/>
+					<b:datepicker locale="en" required="true" required-message="Informe a data final"
+						value="#{lancamentoBean.lancamento.dataFin}"/>
+				</b:column>				
+				</b:panel>
+				
+				<b:column>
+					<h:outputLabel/>
+					<h:panelGroup>
+						<h:commandButton action="#{lancamentoBean.novo}" image="resources/img/novoUser.png" title="Novo"/>
+						<h:commandButton style="margin-left:0.7cm;" action="#{lancamentoBean.salvar}" image="resources/img/salvarUsuario.png"
+							title="Salvar"/>
+						<h:commandButton style="margin-left:0.7cm;" action="#{lancamentoBean.remover}" 
+						image="resources/img/deletarUser.png" title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
+						<h:commandButton style="margin-left:0.7cm;" action="#{lancamentoBean.novo}" image="resources/img/limparForm.png"
+							title="Limpar Formulário"/>
+					</h:panelGroup>
+				</b:column>
+				
+			</b:panelGrid>
+		</b:form>
+		
+		<br/>
+		<br/>
+		
+		<b:form>
+			<b:dataTable value="#{lancamentoBean.lancamentos}" var="lancamento" border="3" cellpadding="6">
 		
 				<f:facet name="header">
-					Lista de Lançamentos
+					<tr><th>Lista de Lançamentos</th></tr>
 				</f:facet>
 			
-				<h:column>
+				<b:column>
 					<f:facet name="header">ID</f:facet>
 					<h:outputText value="#{lancamento.id}"/>
-				</h:column>
+				</b:column>
 				
-				<h:column>
+				<b:column>
 					<f:facet name="header">Nota</f:facet>
 					<h:outputText value="#{lancamento.numeroNotaFiscal}"/>
-				</h:column>
+				</b:column>
 				
-				<h:column>
+				<b:column>
 					<f:facet name="header">Origem</f:facet>
 					<h:outputText value="#{lancamento.empresaOrigem}"/>
-				</h:column>
+				</b:column>
 				
-				<h:column>
+				<b:column>
 					<f:facet name="header">Destino</f:facet>
 					<h:outputText value="#{lancamento.empresaDestino}"/>
-				</h:column>
+				</b:column>
 				
-				<h:column>
+				<b:column>
 					<f:facet name="header">Usuário</f:facet>
 					<h:outputText value="#{lancamento.usuario.nome}"/>
-				</h:column>
+				</b:column>
 				
 				<h:column>
 					<f:facet name="header">Editar</f:facet>
@@ -93,9 +133,8 @@
 					</h:commandLink>
 				</h:column>
 			
-			</h:dataTable>
-					
-	</h:form>
+			</b:dataTable>
+		</b:form>
 	
 </h:body>
 

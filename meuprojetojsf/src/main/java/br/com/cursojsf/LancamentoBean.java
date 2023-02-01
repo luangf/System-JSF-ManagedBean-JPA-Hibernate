@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -37,7 +38,10 @@ public class LancamentoBean implements Serializable{
 		lancamento.setUsuario(pessoaUser);
 
 		lancamento=daoGeneric.merge(lancamento);
+		
 		carregarLancamentos();
+		
+		FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Salvo com sucesso"));
 		
 		return "";
 	}
@@ -48,7 +52,7 @@ public class LancamentoBean implements Serializable{
 		ExternalContext externalContext = context.getExternalContext();
 		Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("usuarioLogado");
 		
-		lancamentos=daoLancamento.consultar(pessoaUser.getId());
+		lancamentos=daoLancamento.consultarLimit10(pessoaUser.getId());
 	}
 	
 	public String novo() {
@@ -60,7 +64,7 @@ public class LancamentoBean implements Serializable{
 		daoGeneric.deletarPorId(lancamento);
 		lancamento = new Lancamento();
 		carregarLancamentos();
-		
+		FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("Excluido com sucesso"));
 		return "";
 	}
 	

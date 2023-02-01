@@ -48,6 +48,7 @@ public class Pessoa implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento = new Date();
+	
 	private String sexo;
 	private String[] frameworks;
 	private Boolean ativo;
@@ -66,9 +67,9 @@ public class Pessoa implements Serializable {
 	private String gia;
 	private String ddd;
 	private String siafi;
-	@CPF(message = "Informe o CPF corretamente por favor")
+	//@CPF(message = "Informe o CPF corretamente por favor")
 	private String cpf;
-	@TituloEleitoral(message = "Titulo eleitoral inválido")
+	//@TituloEleitoral(message = "Titulo eleitoral inválido")
 	private String titEleitoral;
 	@Column(columnDefinition = "text") // gravar arquivos em base 64
 	private String fotoIconBase64;

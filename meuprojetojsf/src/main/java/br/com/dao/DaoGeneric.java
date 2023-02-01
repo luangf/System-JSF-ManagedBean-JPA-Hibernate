@@ -60,12 +60,24 @@ public class DaoGeneric<E> implements Serializable{
 		entityTransaction.commit();
 	} 
 	
-	@SuppressWarnings("unchecked")
 	public List<E> getListEntity(Class<E> entidade){
 		EntityTransaction entityTransaction=entityManager.getTransaction();
 		entityTransaction.begin();
 		
 		List<E> retorno=entityManager.createQuery("from "+entidade.getName()).getResultList();
+		
+		entityTransaction.commit();
+		
+		return retorno;
+	}
+	
+	public List<E> getListEntityLimit10(Class<E> entidade){
+		EntityTransaction entityTransaction=entityManager.getTransaction();
+		entityTransaction.begin();
+		
+		List<E> retorno=entityManager.createQuery("from "+entidade.getName()+" order by id desc")
+				.setMaxResults(10)
+				.getResultList();
 		
 		entityTransaction.commit();
 		

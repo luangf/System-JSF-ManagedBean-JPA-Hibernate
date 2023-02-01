@@ -12,12 +12,12 @@
 
 	<b:messages id="msg" autoUpdate="true"/>
 
-	<b:form id="formLogin" style="margin-top:10%; margin-left:20%;">
+	<b:form id="formLogin" style="margin-top:10%; margin-left:40%; margin-right:40%">
 	
 		<h1>Realize o Login</h1>
 		
-		<b:panelGrid columns="3">
-		
+		<b:panelGrid columns="1">
+			<b:panel>
 			<b:column>
 				<h:outputLabel value="Login:"/>
 				<b:inputText id="login" value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Informe o login"/>
@@ -30,9 +30,12 @@
 				<b:message for="senha" auto-update="true"/>
 			</b:column>
 			
+			<b:column>
+				<b:commandButton value="Acessar" action="#{pessoaBean.logar}" style="width:100%;"/>
+			</b:column>
+			
+			</b:panel>
 		</b:panelGrid>
-		
-		<b:commandButton value="Acessar" action="#{pessoaBean.logar}" style="width:50%;"/>
 		
 	</b:form>
 	
