@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,6 +32,7 @@ public class RelLancamentoBean implements Serializable {
 	@Inject
 	private DaoGeneric<Lancamento> daoGeneric;
 
+	@PostConstruct
 	public void buscarLancamentos() {
 		if (dataIni == null && dataFin == null && numNota == null) {
 			lancamentos = daoGeneric.getListEntity(Lancamento.class);

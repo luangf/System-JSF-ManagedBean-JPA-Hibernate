@@ -1,0 +1,28 @@
+.panel-body {
+    padding: 10px!important;
+}
+
+.panel-default {
+    border: none!important;
+}
+
+body {
+    font-size: 12px!important;
+}
+
+.form-group {
+    margin-bottom: 10px!important;
+}
+
+label {
+    font-weight: 540!important;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 4px!important;
+}
+
+.panel-group{
+	margin-bottom: 5px!important;
+	margin-top: 5px!important;
+}

@@ -1,5 +1,6 @@
 package br.com.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -12,4 +13,6 @@ public interface IDaoPessoa {
 	
 	//para comboBox ou selectOneMenu... se usa SelectItem
 	List<SelectItem> listaEstados(); //retorna uma lista de select items
+
+	List<Pessoa> relatorioPessoa(String nome, Date dataIni, Date dataFin);
 }

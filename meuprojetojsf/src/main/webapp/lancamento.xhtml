@@ -8,6 +8,8 @@
 
 <h:head>
 	<title>Lançamentos</title>
+
+	<link href="resources/estilo.css" rel="stylesheet"/>
 </h:head>
 
 <h:body>
@@ -84,7 +86,7 @@
 		<br/>
 		
 		<b:form>
-			<b:dataTable value="#{lancamentoBean.lancamentos}" var="lancamento" border="3" cellpadding="6">
+			<b:dataTable value="#{lancamentoBean.lancamentos}" var="lancamento">
 		
 				<f:facet name="header">
 					<tr><th>Lista de Lançamentos</th></tr>

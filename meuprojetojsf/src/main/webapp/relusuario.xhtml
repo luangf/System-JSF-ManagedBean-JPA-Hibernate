@@ -7,7 +7,7 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Lançamentos</title>
+	<title>Usuários</title>
 	
 	<link href="resources/estilo.css" rel="stylesheet"/>
 </h:head>
@@ -18,46 +18,40 @@
 
 	<b:messages id="msg"/>
 
-	<b:form id="formLancamento">
+	<b:form id="formPessoas">
 	
 			<b:panelGrid columns="2">
 				
 				<b:column>
 					<h:outputLabel value="Data Inicial:"/>
-					<b:datepicker locale="en" value="#{relLancamentoBean.dataIni}"/>		
+					<b:datepicker locale="en" value="#{relUsuarioBean.dataIni}"/>		
 				</b:column>
 				
 				<b:column>
 					<h:outputLabel value="Data Final:"/>
-					<b:datepicker locale="en" value="#{relLancamentoBean.dataFin}"/>		
+					<b:datepicker locale="en" value="#{relUsuarioBean.dataFin}"/>		
 				</b:column>
 				
 				<b:column>
-					<h:outputLabel value="Número Nota:"/>
-					<b:inputText value="#{relLancamentoBean.numNota}"/>		
+					<h:outputLabel value="Nome:"/>
+					<b:inputText value="#{relUsuarioBean.nome}"/>		
 				</b:column>
 				
 			</b:panelGrid>
 			
-			<b:commandButton value="Buscar" action="#{relLancamentoBean.buscarLancamentos}" look="primary" style="margin-left:15px;"/>
+			<b:commandButton value="Buscar" action="#{relUsuarioBean.relPessoa}" look="primary" style="margin-left:15px;"/>
 		</b:form>
 		
 		<br/>
 		<br/>
 		
 		<b:form>
-			<b:dataTable value="#{relLancamentoBean.lancamentos}" var="lanc" pdf="true" excel="true">
+			<b:dataTable value="#{relUsuarioBean.pessoas}" var="p" pdf="true" excel="true">
 				
-				<b:dataTableColumn value="#{lanc.id}" label="ID"/>
+				<b:dataTableColumn value="#{p.id}" label="ID" order="asc"/>
 				
-				<b:dataTableColumn value="#{lanc.numeroNotaFiscal}" label="Nota"/>
+				<b:dataTableColumn value="#{p.nome}" label="Nome"/>
 				
-				<b:dataTableColumn value="#{lanc.usuario.nome}" label="Nome User"/>
-				
-				<b:dataTableColumn value="#{lanc.dataIni}" label="Data Inicial"/>
-				
-				<b:dataTableColumn value="#{lanc.dataFin}" label="Data Final"/>
-			
 			</b:dataTable>
 		</b:form>
 	
