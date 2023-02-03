@@ -1,4 +1,4 @@
-Sistema Web JSF + ManagedBeans + JPA + HIBERNATE + CDI + C3P0 + Bootsfaces
+Sistema Web JSF + ManagedBeans + JPA + HIBERNATE + CDI + Bootsfaces
 
 --- Estrutura Principal: ---
 - JSF(JavaServer Faces) -> Front End
