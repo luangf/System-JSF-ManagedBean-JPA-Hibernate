@@ -1,7 +1,7 @@
 Sistema Web JSF + ManagedBeans + JPA + HIBERNATE + CDI + C3P0 + Bootsfaces
 
 --- Estrutura Principal: ---
-JSF(JavaServer Faces) -> Front End
+  JSF(JavaServer Faces) -> Front End
 ManagedBeans -> Back End
 JPA + HIBERNATE -> Banco de Dados: PostgreSQL
 Maven
