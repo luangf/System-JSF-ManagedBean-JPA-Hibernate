@@ -92,8 +92,6 @@ public class PessoaBean implements Serializable{
 			pessoa.setGia(gsonPessoaAux.getGia());
 			pessoa.setDdd(gsonPessoaAux.getDdd());
 			pessoa.setSiafi(gsonPessoaAux.getSiafi());
-
-			System.out.println(gsonPessoaAux);
 		} catch (Exception e) {
 			e.printStackTrace();
 			mostrarMsg("Erro ao consultar o CEP");

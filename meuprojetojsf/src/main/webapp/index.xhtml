@@ -12,7 +12,7 @@
 
 <h:body>
 
-	<b:messages id="msg" autoUpdate="true"/>
+	<b:messages id="msg" auto-update="true"/>
 
 	<b:form id="formLogin" style="margin-top:10%; margin-left:40%; margin-right:40%">
 	
@@ -22,13 +22,13 @@
 			<b:panel>
 			<b:column>
 				<h:outputLabel value="Login:"/>
-				<b:inputText id="login" value="#{pessoaBean.pessoa.login}" required="true" requiredMessage="Informe o login"/>
+				<b:inputText id="login" value="#{pessoaBean.pessoa.login}" required="true" required-message="Informe o login"/>
 				<b:message for="login" auto-update="true"/>
 			</b:column>
 			
 			<b:column>
 				<h:outputLabel value="Senha:"/>
-				<b:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}" required="true" requiredMessage="Informe a senha"/>
+				<b:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}" required="true" required-message="Informe a senha"/>
 				<b:message for="senha" auto-update="true"/>
 			</b:column>
 			
