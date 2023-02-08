@@ -17,7 +17,7 @@
 
 	<ui:include src="/menu.xhtml"/>
 	
-	<h:form id="formPessoa" enctype="multipart/form-data" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+	<h:form id="formPessoa" enctype="multipart/form-data">
 	
 		<b:messages/>
 		
@@ -32,7 +32,7 @@
 				<b:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
 			</b:column>
 			
-			<b:column>
+			<b:column style="margin-bottom: 5px;">
 				<h:outputLabel value="Foto:"/>
 				<h:inputFile id="foto" value="#{pessoaBean.arquivoFoto}"/>
 			</b:column>
@@ -50,7 +50,8 @@
 			
 			<b:column>
 				<h:outputLabel value="Idade:"/>
-				<b:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric"/>
+				<b:inputText value="#{pessoaBean.pessoa.idade}" mask="numeric" style="text-align: left !important;"
+					placeholder="Digite sua Idade aqui"/>
 			</b:column>
 			
 			<b:column>
@@ -111,7 +112,7 @@
 			
 			</b:panel>
 			<b:panel>
-			<b:column >
+			<b:column>
 				<h:outputLabel value="Linguagens:"/>
 				<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagens}">
 					<f:selectItem itemValue="1" itemLabel="Java"/>
@@ -125,10 +126,11 @@
 			<!-- tirei immediate="true" -->
 			<b:column>
 				<h:outputLabel value="Estados:"/>
-				<b:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" id="comboEstados" converter="estadoConverter">
+				<b:selectOneMenu value="#{pessoaBean.pessoa.estadoSelecionado}" id="comboEstados" converter="estadoConverter"
+					immediate="true">
 					<f:selectItem itemLabel="--[Selecione]--" noSelectionOption="true" itemValue="0"/>
 					<f:selectItems value="#{pessoaBean.estados}"/>
-					<f:ajax event="change" execute="@form" render="@form" listener="#{pessoaBean.carregaCidades}"/>
+					<f:ajax event="change" execute="@this" render="comboCidades" listener="#{pessoaBean.carregaCidades}"/>
 				</b:selectOneMenu>
 			</b:column>
 			
@@ -149,7 +151,8 @@
 					<!-- @this: componente pai desse ajax -->
 					<!-- listener: método q será executado no back end -->
 					<!-- render: recarrega o objeto -->
-					<f:ajax event="blur" execute="@form" render="@form" listener="#{pessoaBean.pesquisaCep}"/>
+					<f:ajax event="blur" execute="@this" render="logradouro complemento bairro localidade uf ibge gia ddd siafi"
+						listener="#{pessoaBean.pesquisaCep}"/>
 				</b:inputText>
 			</b:column>
 			
@@ -210,7 +213,7 @@
 			
 			<b:column>
 				<h:outputLabel value="Senha:"/>
-				<b:inputSecret value="#{pessoaBean.pessoa.senha}"/>
+				<b:inputSecret value="#{pessoaBean.pessoa.senha}" autocomplete="off" maxlength="50"/>
 			</b:column>
 			</b:panel>
 			
@@ -224,7 +227,7 @@
 					image="resources/img/salvarUsuario.png" title="Salvar Usuário"/>
 					
 				<h:commandButton style="margin-left:0.7cm;" value="Deletar" action="#{pessoaBean.remover}" image="resources/img/deletarUser.png"
-					title="Deletar Usuário" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" immediate="true"/>
+					title="Deletar Usuário" immediate="true"/>
 					
 				<h:commandButton id="botaoLimpar" style="margin-left:0.7cm;" action="#{pessoaBean.limpar}" value="Limpar" 
 					image="resources/img/limparForm.png" title="Limpar Formulário" immediate="true">
@@ -241,51 +244,33 @@
 		
 	<b:form id="formTable">
 		<b:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
-		
-			<f:facet name="header">
-				<tr><th>Lista de Usuários Cadastrados</th></tr>
-			</f:facet>
-		
-			<h:column>
-				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{pessoa.id}"/>
-			</h:column>
+			<b:dataTableColumn value="#{pessoa.id}" label="ID"/>
+
+			<b:dataTableColumn value="#{pessoa.nome}" label="Nome"/>
 			
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{pessoa.nome}"/>
-			</h:column>
+			<b:dataTableColumn value="#{pessoa.sobrenome}" label="Sobrenome"/>
 			
-			<h:column>
-				<f:facet name="header">Foto</f:facet>
+			<b:dataTableColumn label="Foto" orderable="false" width="140">
 				<h:commandLink actionListener="#{pessoaBean.download}">
 					<h:graphicImage width="40" height="40" value="#{pessoa.fotoIconBase64}"/>
 					<f:param name="fileDownloadId" value="#{pessoa.id}"/>
+					<h:outputText value=" Baixar Foto"/>
 				</h:commandLink>
-			</h:column>
+			</b:dataTableColumn>
 			
-			<h:column>
-				<f:facet name="header">Sobrenome</f:facet>
-				<h:outputText value="#{pessoa.sobrenome}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Editar</f:facet>
-				
+			<b:dataTableColumn label="Editar" orderable="false" width="140">
 				<h:commandLink title="Editar Usuário" action="#{pessoaBean.editar}" immediate="true">
 					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
-					<h:graphicImage value="resources/img/editarUser.png" width="30px"/>
+					<h:graphicImage value="resources/img/editarUser.png" width="30"/>
 				</h:commandLink>
-			</h:column>
+			</b:dataTableColumn>
 			
-			<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
-				<f:facet name="header">Excluir</f:facet>
-				
+			<b:dataTableColumn label="Excluir" orderable="false" width="140">
 				<h:commandLink action="#{pessoaBean.remover}" title="Excluir Usuário" immediate="true">
 					<f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
-					<h:graphicImage value="resources/img/deletarUser.png" width="30px"/>
+					<h:graphicImage value="resources/img/deletarUser.png" width="30"/>
 				</h:commandLink>
-			</h:column>
+			</b:dataTableColumn>
 			
 		</b:dataTable>	
 	</b:form>

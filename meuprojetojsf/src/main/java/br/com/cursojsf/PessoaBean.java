@@ -133,7 +133,7 @@ public class PessoaBean implements Serializable{
 		
 		pessoa = daoGeneric.merge(pessoa); // salva(persiste)/atualiza e retorna o obj da entidade/classe
 		carregarPessoas();
-		mostrarMsg("Cadastrado com sucesso!");
+		mostrarMsg("Salvo com sucesso!");
 		return "";
 	}
 
@@ -163,7 +163,8 @@ public class PessoaBean implements Serializable{
 
 	@PostConstruct
 	public void carregarPessoas() {
-		pessoas = daoGeneric.getListEntityLimit10(Pessoa.class);
+		pessoas = daoGeneric.getListEntity(Pessoa.class);
+		//pessoas = daoGeneric.getListEntityLimit10(Pessoa.class); //caso queira 10 registros apenas
 	}
 
 	public Pessoa getPessoa() {
@@ -331,13 +332,17 @@ public class PessoaBean implements Serializable{
 		
 		Pessoa pessoa=daoGeneric.consultar(Pessoa.class, fileDownloadId);
 		
-		HttpServletResponse response=(HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-Disposition", "attachment; filename=download."+pessoa.getExtensao());
-		response.setContentType("application/octet-stream");
-		response.setContentLength(pessoa.getFotoIconBase64Original().length);
-		response.getOutputStream().write(pessoa.getFotoIconBase64Original());
-		response.getOutputStream().flush();
-		FacesContext.getCurrentInstance().responseComplete();
+		if(pessoa.getFotoIconBase64() != null && !pessoa.getFotoIconBase64().isEmpty()) {
+			HttpServletResponse response=(HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+			response.addHeader("Content-Disposition", "attachment; filename=download."+pessoa.getExtensao());
+			response.setContentType("application/octet-stream");
+			response.setContentLength(pessoa.getFotoIconBase64Original().length);
+			response.getOutputStream().write(pessoa.getFotoIconBase64Original());
+			response.getOutputStream().flush();
+			FacesContext.getCurrentInstance().responseComplete();
+		}else {
+			mostrarMsg("Usuário (Nome: "+pessoa.getNome()+ ", ID: "+pessoa.getId()+") não possui imagem");
+		}
 	}
 	
 	public void mudancaDeValor(ValueChangeEvent event) {

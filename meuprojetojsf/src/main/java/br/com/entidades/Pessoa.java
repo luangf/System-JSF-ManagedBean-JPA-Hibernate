@@ -42,7 +42,7 @@ public class Pessoa implements Serializable {
 	@NotNull(message = "Sobrenome deve ser informado")
 	private String sobrenome;
 
-	@DecimalMax(value = "70", message = "Idade deve ser menor que 50")
+	@DecimalMax(value = "150", message = "Idade deve ser menor que 150")
 	@DecimalMin(value = "10", message = "Idade deve ser maior que 10")
 	private Integer idade;
 
