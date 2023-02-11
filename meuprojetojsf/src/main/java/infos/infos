@@ -1,0 +1,2 @@
+<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<property name="hibernate.hbm2ddl.auto" value="update"/>

@@ -84,34 +84,56 @@
 		
 		<br/>
 		<br/>
-		<h3>Lista de Lançamentos</h3>
-				
+		
 		<b:form>
 			<b:dataTable value="#{lancamentoBean.lancamentos}" var="lancamento">
 		
-				<b:dataTableColumn value="#{lancamento.id}" label="ID"/>
+				<f:facet name="header">
+					<tr><th>Lista de Lançamentos</th></tr>
+				</f:facet>
+			
+				<b:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{lancamento.id}"/>
+				</b:column>
 				
-				<b:dataTableColumn value="#{lancamento.numeroNotaFiscal}" label="Nota"/>
+				<b:column>
+					<f:facet name="header">Nota</f:facet>
+					<h:outputText value="#{lancamento.numeroNotaFiscal}"/>
+				</b:column>
 				
-				<b:dataTableColumn value="#{lancamento.empresaOrigem}" label="Origem"/>
+				<b:column>
+					<f:facet name="header">Origem</f:facet>
+					<h:outputText value="#{lancamento.empresaOrigem}"/>
+				</b:column>
 				
-				<b:dataTableColumn value="#{lancamento.empresaDestino}" label="Destino"/>
+				<b:column>
+					<f:facet name="header">Destino</f:facet>
+					<h:outputText value="#{lancamento.empresaDestino}"/>
+				</b:column>
 				
-				<b:dataTableColumn value="#{lancamento.usuario.nome}" label="Nome Usuário"/>
+				<b:column>
+					<f:facet name="header">Usuário</f:facet>
+					<h:outputText value="#{lancamento.usuario.nome}"/>
+				</b:column>
 				
-				<b:dataTableColumn label="Editar" orderable="false">
+				<h:column>
+					<f:facet name="header">Editar</f:facet>
+					
 					<h:commandLink title="Editar">
 						<f:setPropertyActionListener value="#{lancamento}" target="#{lancamentoBean.lancamento}"/>
 						<h:graphicImage value="resources/img/editarUser.png"/>
 					</h:commandLink>
-				</b:dataTableColumn>
+				</h:column>
 				
-				<b:dataTableColumn rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" label="Excluir" orderable="false">
+				<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
+					<f:facet name="header">Excluir</f:facet>
+					
 					<h:commandLink action="#{lancamentoBean.remover}" title="Excluir">
 						<f:setPropertyActionListener value="#{lancamento}" target="#{lancamentoBean.lancamento}"/>
 						<h:graphicImage value="resources/img/deletarUser.png"/>
 					</h:commandLink>
-				</b:dataTableColumn>
+				</h:column>
 			
 			</b:dataTable>
 		</b:form>
