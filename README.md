@@ -16,10 +16,10 @@ Web System Java CRUD
 ![5](https://github.com/user-attachments/assets/150d1099-3e0b-4d00-b02b-4fc684918c23)
 
 Some general features of the system:
-- Cadastro de usuários
-- Cadastro de nota fiscal
-- Relatório dos usuários cadastrados
-- Relatório das notas fiscais cadastradas
+- User registration;
+- Tax invoice registration
+- Registered users report
+- Report of registered invoices
 
 Tools:
 - Maven
