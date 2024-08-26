@@ -1,7 +1,7 @@
 Web System Java CRUD
 
 --- Main Structure: ---
-- JSF (JavaServer Faces)
+- JSF (JavaServer Faces) | BootsFaces
 - ManagedBeans
 - JPA + HIBERNATE -> Banco de Dados: PostgreSQL
 
