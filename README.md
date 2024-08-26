@@ -26,8 +26,7 @@ Tools:
 - Eclipse IDE
 
 Technologies also used in the project:
-- C3P0
-- CDI(Contexts and Dependency Injection)
-- Bean Validator/Hibernate Validator
-- BootsFaces
+- Connection pool with C3P0
+- CDI (Contexts and Dependency Injection)
+- Bean/Hibernate Validator
 - Web Service CEP
